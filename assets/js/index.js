@@ -71,5 +71,5 @@ cam.addEventListener('play', async () => {
             )
                 .draw(canvas)
         })
-    }, 100)
+    }, 500)
 })
