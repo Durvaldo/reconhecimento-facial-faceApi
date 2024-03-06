@@ -1,22 +1,4 @@
 const cam = document.getElementById('cam')
-const selectCam = document.getElementById('cam-selector')
-
-const enableCameraOptions = () => {
-    navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            if (Array.isArray(devices)) {
-                devices.forEach(device => {
-                    if (device.kind === 'videoinput') {
-                        console.log(device)
-                        const option = document.createElement('option')
-                        option.value = device.deviceId
-                        option.text = device.label
-                        selectCam.appendChild(option)
-                    }
-                })
-            }
-        })
-}
 
 const startVideo = deviceId => {
     navigator.getUserMedia(
@@ -27,12 +9,6 @@ const startVideo = deviceId => {
         error => console.error(error)
     )
 }
-
-selectCam.addEventListener('change', () => {
-    if (selectCam.value != '') {
-        startVideo(selectCam.value)
-    }
-})
 
 const loadLabels = () => {
     const labels = ['Durvaldo Gonçalves Marques', 'James Herique']
@@ -66,10 +42,12 @@ Promise.all([
 
 cam.addEventListener('play', async () => {
     const canvas = faceapi.createCanvasFromMedia(cam)
+    const camWidth = cam.getBoundingClientRect().width;
+    const camHeight = cam.getBoundingClientRect().height;
     var videoContainer = document.getElementById('video-container');
     videoContainer.appendChild(canvas);
 
-    const displaySize = { width: cam.width, height: cam.height }
+    const displaySize = { width: camWidth, height: camHeight }
     const labels = await loadLabels()
 
     faceapi.matchDimensions(canvas, displaySize)
