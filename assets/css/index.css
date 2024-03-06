@@ -1,0 +1,8 @@
+#video-container {
+    display: flex;
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+}
