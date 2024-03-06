@@ -21,7 +21,7 @@ const enableCameraOptions = () => {
 const startVideo = deviceId => {
     navigator.getUserMedia(
         {
-            video: { deviceId }
+            video: true
         },
         stream => cam.srcObject = stream,
         error => console.error(error)
@@ -62,7 +62,7 @@ Promise.all([
     faceapi.nets.faceLandmark68Net.loadFromUri('/assets/lib/face-api/models'),
     faceapi.nets.faceRecognitionNet.loadFromUri('/assets/lib/face-api/models'),
     faceapi.nets.ssdMobilenetv1.loadFromUri('/assets/lib/face-api/models'),
-]).then(enableCameraOptions)
+]).then(startVideo)
 
 cam.addEventListener('play', async () => {
     const canvas = faceapi.createCanvasFromMedia(cam)
