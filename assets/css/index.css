@@ -6,3 +6,10 @@
 canvas {
     position: absolute;
 }
+
+#loading_gif {
+    position: absolute;
+    translate: -50% -50%;
+    top: 50%;
+    left: 50%;
+}
